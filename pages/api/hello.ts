@@ -1,13 +1,22 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { readFileSync } from 'fs'
 
-type Data = {
-  name: string
+const FONT_NAME = 'marcellus/MarcellusSC-Regular.woff2';
+
+interface Props {
+  fontPath: string
+  fontData: string
 }
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Props>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  const fontPath = `${process.cwd()}/fonts/${FONT_NAME}`;
+  const fontData = readFileSync(fontPath).toString('base64');
+
+  res.status(200).json({
+    fontPath,
+    fontData,
+  })
 }

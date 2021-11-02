@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-// @ts-ignore
-const { readFileSync } = __non_webpack_require__('fs');
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -9,10 +7,9 @@ const FONT_NAME = 'marcellus/MarcellusSC-Regular.woff2';
 
 interface Props {
   fontPath: string
-  fontData: string
 }
 
-const Home: NextPage<Props> = ({ fontPath, fontData }) => {
+const Home: NextPage<Props> = ({ fontPath }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -34,7 +31,6 @@ const Home: NextPage<Props> = ({ fontPath, fontData }) => {
             <strong>Server-side data:</strong>
             <br />
             {fontPath}
-            {fontData}
           </p>
 
         </div>
@@ -93,10 +89,9 @@ const Home: NextPage<Props> = ({ fontPath, fontData }) => {
 
 Home.getInitialProps = async (): Promise<Props> => {
   const fontPath = `${process.cwd()}/fonts/${FONT_NAME}`;
-  const fontData = readFileSync(fontPath).toString('base64');
+  
   return {
     fontPath,
-    fontData,
   }
 };
 

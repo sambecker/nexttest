@@ -12,7 +12,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Props>
 ) {
-  const fontPath = `${process.cwd()}/fonts/${FONT_NAME}`;
+  const fontPath = `${process.cwd()}/public/fonts/${FONT_NAME}`;
   const fontData = readFileSync(fontPath).toString('base64');
 
   res.status(200).json({

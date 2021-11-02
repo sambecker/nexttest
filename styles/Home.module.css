@@ -114,3 +114,32 @@
     flex-direction: column;
   }
 }
+
+.buttonContainer {
+  margin-top: 2rem;
+}
+
+.button {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.5rem;
+  background: rgb(243, 243, 243);
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 0.25rem;
+}
+
+.button:active {
+  background: rgb(201, 201, 201);
+}
+
+.buttonAlt {
+  background: rgb(255, 236, 245);
+  border-color: rgb(233, 152, 196);
+}
+
+.buttonAlt:active {
+  background: rgb(255, 203, 232);
+}

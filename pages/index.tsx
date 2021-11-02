@@ -1,17 +1,18 @@
 import type { NextPage } from 'next'
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+// @ts-ignore
+const { readFileSync } = __non_webpack_require__('fs');
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+const FONT_NAME = 'marcellus/MarcellusSC-Regular.woff2';
+
 interface Props {
-  data: string
+  fontPath: string
+  fontData: string
 }
 
-const Home: NextPage<Props> = ({ data }) => {
-  const [isShowingButton, setIsShowingButton] = useState(true);
-
+const Home: NextPage<Props> = ({ fontPath, fontData }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -32,30 +33,9 @@ const Home: NextPage<Props> = ({ data }) => {
           <p className={styles.server}>
             <strong>Server-side data:</strong>
             <br />
-            {data}
+            {fontPath}
+            {fontData}
           </p>
-
-          <AnimatePresence>
-            {isShowingButton
-              ? <motion.div
-                className={styles.button}
-                onClick={() => setIsShowingButton(false)}
-                initial={{ top: '-1rem', opacity: 0 }}
-                animate={{ top: '0rem', opacity: 1 }}
-                exit={{ top: '1rem', opacity: 0}}
-              >
-                Hide Button
-              </motion.div>
-              : <motion.div
-                className={`${styles.button} ${styles.buttonAlt}`}
-                onClick={() => setIsShowingButton(true)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                Restore button
-              </motion.div>}
-          </AnimatePresence>
 
         </div>
 
@@ -112,8 +92,11 @@ const Home: NextPage<Props> = ({ data }) => {
 }
 
 Home.getInitialProps = async (): Promise<Props> => {
+  const fontPath = `${process.cwd()}/fonts/${FONT_NAME}`;
+  const fontData = readFileSync(fontPath).toString('base64');
   return {
-    data: 'SERVER-GENERATED RESULT',
+    fontPath,
+    fontData,
   }
 };
 

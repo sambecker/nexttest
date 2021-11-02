@@ -5,7 +5,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+interface Props {
+  data: string
+}
+
+const Home: NextPage<Props> = ({ data }) => {
   const [isShowingButton, setIsShowingButton] = useState(true);
 
   return (
@@ -24,6 +28,12 @@ const Home: NextPage = () => {
         </h1>
 
         <div className={styles.buttonContainer}>
+
+          <p className={styles.server}>
+            <strong>Server-side data:</strong>
+            <br />
+            {data}
+          </p>
 
           <AnimatePresence>
             {isShowingButton
@@ -100,5 +110,11 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+Home.getInitialProps = async (): Promise<Props> => {
+  return {
+    data: 'SERVER-GENERATED RESULT',
+  }
+};
 
 export default Home

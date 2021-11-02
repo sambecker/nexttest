@@ -117,11 +117,22 @@
 
 .buttonContainer {
   margin-top: 2rem;
+  text-align: center;
+}
+
+.server {
+  margin-bottom: 3rem;
+}
+
+.server strong {
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
 .button {
   position: relative;
   cursor: pointer;
+  display: inline-block;
   user-select: none;
   font-weight: bold;
   line-height: 1;
